@@ -47,7 +47,28 @@ public class UserService {
         adminUser.setPassword("admin@pass");
         Set<ProfileModel> adminProfiles = new HashSet<>();
         adminProfiles.add(adminProfile);
+        adminUser.setProfile(adminProfiles);
         userRepository.save(adminUser);
+
+        UserModel userUser = new UserModel();
+        userUser.setName("user");
+        userUser.setEmail("user@gmail.com");
+        userUser.setNumber("85 912345678");
+        userUser.setPassword("user@pass");
+        Set<ProfileModel> userProfiles = new HashSet<>();
+        userProfiles.add(userProfile);
+        userUser.setProfile(userProfiles);
+        userRepository.save(userUser);
+
+        UserModel vendorUser = new UserModel();
+        vendorUser.setName("vendor");
+        vendorUser.setEmail("vendor@gmail.com");
+        vendorUser.setNumber("85 912345678");
+        vendorUser.setPassword("vendor@pass");
+        Set<ProfileModel> vendorProfiles = new HashSet<>();
+        vendorProfiles.add(vendorProfile);
+        vendorUser.setProfile(vendorProfiles);
+        userRepository.save(vendorUser);
 
 
     }
