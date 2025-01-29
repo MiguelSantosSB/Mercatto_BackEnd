@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.io.Serial;
 
 @Entity
-@Table(name = "profile")
-public class ProfileModel {
+@Table(name = "role")
+public class RoleModel {
 
     @Serial
     private static final long serialVersionUID = 1L;

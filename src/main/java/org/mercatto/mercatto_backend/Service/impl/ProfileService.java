@@ -1,7 +1,7 @@
 package org.mercatto.mercatto_backend.Service.impl;
 
-import org.mercatto.mercatto_backend.model.ProfileModel;
-import org.mercatto.mercatto_backend.repositories.ProfileRepository;
+import org.mercatto.mercatto_backend.model.RoleModel;
+import org.mercatto.mercatto_backend.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 public class ProfileService {
 
     @Autowired
-    private ProfileRepository profileRepository;
+    private RoleRepository roleRepository;
 
-    public ProfileModel createNewProfile(ProfileModel profile) {
-        return profileRepository.save(profile);
+    public RoleModel createNewProfile(RoleModel profile) {
+        return roleRepository.save(profile);
     }
-
-
 }

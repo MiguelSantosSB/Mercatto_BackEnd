@@ -1,7 +1,14 @@
 package org.mercatto.mercatto_backend.repositories;
 
 import org.mercatto.mercatto_backend.model.UserModel;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends CrudRepository<UserModel, Long> {
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<UserModel, Long> {
+    Optional<UserModel> findByEmail(String email);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByNumber(String number);
 }

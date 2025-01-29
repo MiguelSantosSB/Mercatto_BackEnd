@@ -1,39 +1,25 @@
 package org.mercatto.mercatto_backend.controller;
 
-import jakarta.annotation.PostConstruct;
-import org.mercatto.mercatto_backend.Service.impl.UserService;
-import org.mercatto.mercatto_backend.model.UserModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.mercatto.mercatto_backend.Service.UserService;
+import org.mercatto.mercatto_backend.dto.request.UserRequest;
+import org.mercatto.mercatto_backend.dto.response.UserResponse;
+import org.mercatto.mercatto_backend.mapper.UserMapper;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Tag(name = "usuário", description = "Controlador para salvar e editar o dados de usuário")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @PostConstruct
-    public void initProfileAndUsers() {
-        userService.initProfilesAndUser();
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @PostMapping({"/createUser"})
-    public UserModel CreateUser(@RequestBody UserModel user) {
-        return userService.createUser(user);
+    public ResponseEntity<UserResponse> save(UserRequest request) {
+        var response = UserMapper.insertRequestToModel(request);
+        return ResponseEntity.ok().body(UserMapper.modelToInsertResponse(userService.save(response)));
     }
-
-    @GetMapping({"/forAdmin"})
-    public String forAdmin() {
-        return "This URL is only accessible to admin";
-    }
-
-    @GetMapping({"/forUser"})
-    public String forUser() {
-        return "This URL is only accessible to user";
-    }
-
-
 }

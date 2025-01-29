@@ -1,9 +1,9 @@
 package org.mercatto.mercatto_backend.repositories;
 
-import org.mercatto.mercatto_backend.model.ProfileModel;
+import org.mercatto.mercatto_backend.model.RoleModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProfileRepository extends CrudRepository<ProfileModel, Long> {
+public interface RoleRepository extends CrudRepository<RoleModel, Long> {
 }

@@ -1,13 +1,16 @@
 package org.mercatto.mercatto_backend.model;
 
 import jakarta.persistence.*;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serial;
+import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "user")
-public class UserModel {
+public class UserModel implements UserDetails {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -25,7 +28,7 @@ public class UserModel {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "USER_PROFILE",
+    @JoinTable(name = "USER_ROLE",
             joinColumns = {
                 @JoinColumn(name = "USER_ID")
             },
@@ -33,7 +36,20 @@ public class UserModel {
                 @JoinColumn(name = "ROLE_ID")
             }
     )
-    private Set<ProfileModel> profile;
+    private Set<RoleModel> role;
+
+
+    public UserModel() {
+    }
+
+    public UserModel(Long id, String name, String email, String number, String password, Set<RoleModel> role) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.number = number;
+        this.password = password;
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
@@ -75,11 +91,42 @@ public class UserModel {
         this.password = password;
     }
 
-    public Set<ProfileModel> getProfile() {
-        return profile;
+    public Set<RoleModel> getRole() {
+        return role;
     }
 
-    public void setProfile(Set<ProfileModel> profile) {
-        this.profile = profile;
+    public void setRole(Set<RoleModel> role) {
+        this.role = role;
+    }
+
+    // métodos de UserDetails
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return role.stream().map(role -> (GrantedAuthority) role::getRoleName).collect(Collectors.toSet());
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
