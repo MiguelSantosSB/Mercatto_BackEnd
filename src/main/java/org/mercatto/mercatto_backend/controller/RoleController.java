@@ -1,6 +1,6 @@
 package org.mercatto.mercatto_backend.controller;
 
-import org.mercatto.mercatto_backend.Service.impl.ProfileService;
+import org.mercatto.mercatto_backend.Service.impl.RoleService;
 import org.mercatto.mercatto_backend.model.RoleModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ProfileController {
+public class RoleController {
 
     @Autowired
-    private ProfileService profileService;
+    private RoleService roleService;
 
-    @PostMapping({"/createProfile"})
-    public RoleModel createNewProfile(@RequestBody RoleModel profile) {
-        return profileService.createNewProfile(profile);
+    @PostMapping({"/createRole"})
+    public RoleModel createNewRole(@RequestBody RoleModel role) {
+        return roleService.createNewRole(role);
     }
 }

@@ -30,7 +30,13 @@ public class SecurityFilter extends OncePerRequestFilter {
         String requestPath = request.getRequestURI();
 
         // Ignorar autenticação para endpoints públicos
-        if (requestPath.startsWith("/auth/register") || requestPath.startsWith("/auth/login")) {
+        if (requestPath.startsWith("/auth/register") ||
+                requestPath.startsWith("/auth/login") ||
+                requestPath.startsWith("/swagger-ui") ||
+                requestPath.startsWith("/v3/api-docs") ||
+                requestPath.startsWith("/swagger-resources") ||
+                requestPath.startsWith("/webjars")) {
+
             filterChain.doFilter(request, response);
             return;
         }

@@ -32,11 +32,16 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login", "/swagger-ui.html/**").permitAll()
+                        .requestMatchers("/auth/register", "/auth/login", "/swagger-ui/index.html").permitAll()
                         .requestMatchers("/api/**").hasAnyRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER")
                         .requestMatchers("/store/**").hasAnyRole("ADMIN", "VENDOR")
-                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
@@ -51,7 +56,7 @@ public class SecurityConfiguration {
     public static final String SECURITY = "bearerAuth";
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs/**",
-            "/swagger-ui.html/**",
+            "/swagger-ui/index.html/**",
             "/v3/api-docs/**",
             "/swagger-resources/**",
     };

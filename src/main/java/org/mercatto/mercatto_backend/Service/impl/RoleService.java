@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProfileService {
+public class RoleService {
 
     @Autowired
     private RoleRepository roleRepository;
 
-    public RoleModel createNewProfile(RoleModel profile) {
-        return roleRepository.save(profile);
+    public RoleModel createNewRole(RoleModel role) {
+        return roleRepository.save(role);
     }
 }
