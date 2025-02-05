@@ -32,7 +32,7 @@ public class TokenService {
                     .withSubject(user.getEmail())
                     .withExpiresAt(generateExpirationDate())
                     .withClaim("roles", user.getRole().stream()
-                            .map(RoleModel::getRoleName).toList())
+                            .map(RoleModel::getName).toList())
                     .sign(algorithm);
 
         } catch (JWTCreationException exception) {

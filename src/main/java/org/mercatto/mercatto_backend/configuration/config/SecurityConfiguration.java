@@ -32,7 +32,7 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login", "/swagger-ui/index.html").permitAll()
+                        .requestMatchers("/auth/register", "/auth/login", "/swagger-ui/index.html", "/role/create").permitAll()
                         .requestMatchers("/api/**").hasAnyRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER")
                         .requestMatchers("/store/**").hasAnyRole("ADMIN", "VENDOR")

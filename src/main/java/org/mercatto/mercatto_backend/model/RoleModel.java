@@ -15,8 +15,18 @@ public class RoleModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String roleName;
-    private String roleDescription;
+    private String name;
+    private String description;
+
+    public RoleModel() {
+    }
+
+    public RoleModel(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
 
     public Long getId() {
         return id;
@@ -26,19 +36,19 @@ public class RoleModel {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setName(String roleName) {
+        this.name = roleName;
     }
 
-    public String getRoleDescription() {
-        return roleDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRoleDescription(String roleDescription) {
-        this.roleDescription = roleDescription;
+    public void setDescription(String roleDescription) {
+        this.description = roleDescription;
     }
 }

@@ -35,7 +35,8 @@ public class SecurityFilter extends OncePerRequestFilter {
                 requestPath.startsWith("/swagger-ui") ||
                 requestPath.startsWith("/v3/api-docs") ||
                 requestPath.startsWith("/swagger-resources") ||
-                requestPath.startsWith("/webjars")) {
+                requestPath.startsWith("/webjars")||
+                requestPath.startsWith("/role/create")) {
 
             filterChain.doFilter(request, response);
             return;

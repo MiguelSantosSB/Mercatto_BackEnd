@@ -3,7 +3,7 @@ package org.mercatto.mercatto_backend.controller;
 import org.mercatto.mercatto_backend.Service.UserService;
 import org.mercatto.mercatto_backend.Service.impl.TokenService;
 import org.mercatto.mercatto_backend.dto.request.UserRequest;
-import org.mercatto.mercatto_backend.exeption.DataAlreadyregisteredException;
+import org.mercatto.mercatto_backend.exception.DataAlreadyregisteredException;
 import org.mercatto.mercatto_backend.model.UserModel;
 import org.mercatto.mercatto_backend.repositories.UserRepository;
 import org.springframework.http.HttpStatus;

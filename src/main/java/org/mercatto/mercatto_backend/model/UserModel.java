@@ -102,7 +102,7 @@ public class UserModel implements UserDetails {
     // métodos de UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.stream().map(role -> (GrantedAuthority) role::getRoleName).collect(Collectors.toSet());
+        return role.stream().map(role -> (GrantedAuthority) role::getName).collect(Collectors.toSet());
     }
 
     @Override
