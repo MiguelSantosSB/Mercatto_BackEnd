@@ -1,8 +1,15 @@
 package org.mercatto.mercatto_backend.Service;
+import org.mercatto.mercatto_backend.dto.request.UserRequest;
+import org.mercatto.mercatto_backend.dto.response.UserResponse;
 
-import org.mercatto.mercatto_backend.model.UserModel;
+import java.util.List;
+
 
 public interface UserService {
 
-    UserModel save(UserModel model);
+    UserResponse create(UserRequest userRequest);
+    UserResponse findById(Long id);
+    List<UserResponse> findAll();
+    UserResponse update(Long id, UserRequest userRequest);
+    void delete(Long id);
 }

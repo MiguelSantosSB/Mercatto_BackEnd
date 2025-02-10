@@ -1,19 +1,9 @@
-package org.mercatto.mercatto_backend.model;
+package org.mercatto.mercatto_backend.dto.response;
 
-import jakarta.persistence.*;
+public class RoleResponse {
 
-@Entity
-@Table(name = "roles")
-public class RoleModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
     private String name;
-
-    @Column(nullable = false)
     private String description;
 
     public Long getId() {

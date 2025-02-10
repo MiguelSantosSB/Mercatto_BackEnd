@@ -1,51 +1,51 @@
 package org.mercatto.mercatto_backend.controller;
 
-import org.mercatto.mercatto_backend.Service.impl.RoleService;
+import org.mercatto.mercatto_backend.Service.RoleService;
 import org.mercatto.mercatto_backend.dto.request.RoleRequest;
-import org.mercatto.mercatto_backend.model.RoleModel;
-import org.mercatto.mercatto_backend.repositories.RoleRepository;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.mercatto.mercatto_backend.dto.response.RoleResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/roles")
 public class RoleController {
 
     private final RoleService service;
 
-    private final RoleRepository repository;
-
-    public RoleController(RoleService roleService, RoleRepository roleRepository) {
-        this.service = roleService;
-        this.repository = roleRepository;
+    public RoleController(RoleService service) {
+        this.service = service;
     }
 
-    @PostMapping({"/create"})
-    public ResponseEntity create(@RequestBody RoleRequest body) {
-        Optional<RoleModel> role = this.repository.findByName(body.getName());
+    @PostMapping("/create")
+    public ResponseEntity<RoleResponse> create(@RequestBody RoleRequest request) {
+        RoleResponse response = service.create(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
 
-        if (role.isPresent()) {
-            return ResponseEntity.badRequest().body("Role já cadastrada");
-        }
+    @GetMapping("/{id}")
+    public ResponseEntity<RoleResponse> getById(@PathVariable Long id) {
+        RoleResponse response = service.findById(id);
+        return ResponseEntity.ok(response);
+    }
 
-        RoleModel newRole = new RoleModel();
-        newRole.setName(body.getName());
-        newRole.setDescription(body.getDescription());
+    @GetMapping
+    public ResponseEntity<List<RoleResponse>> getAll() {
+        List<RoleResponse> response = service.findAll();
+        return ResponseEntity.ok(response);
+    }
 
-        try {
-            RoleModel saved = service.save(newRole);
-            return ResponseEntity.ok(saved);
-        } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar a nova role");
-        }
+    @PutMapping("/{id}")
+    public ResponseEntity<RoleResponse> update(@PathVariable Long id, @RequestBody RoleRequest request) {
+        RoleResponse response = service.update(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<RoleResponse> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

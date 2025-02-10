@@ -2,14 +2,16 @@ package org.mercatto.mercatto_backend.model;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serial;
 import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class UserModel implements UserDetails {
 
     @Serial
@@ -19,35 +21,40 @@ public class UserModel implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false, unique = true)
     private String number;
 
+    @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "USER_ROLE",
-            joinColumns = {
-                @JoinColumn(name = "USER_ID")
-            },
-            inverseJoinColumns = {
-                @JoinColumn(name = "ROLE_ID")
-            }
-    )
-    private Set<RoleModel> role;
+    @Column(unique = true)
+    private String cpf;
 
+    @Column(unique = true)
+    private String rg;
+
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private RoleModel role;
 
     public UserModel() {
     }
 
-    public UserModel(Long id, String name, String email, String number, String password, Set<RoleModel> role) {
+    public UserModel(Long id, String name, String email, String number, String password, String cpf, String rg, RoleModel role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.number = number;
         this.password = password;
+        this.cpf = cpf;
+        this.rg = rg;
         this.role = role;
     }
 
@@ -91,18 +98,33 @@ public class UserModel implements UserDetails {
         this.password = password;
     }
 
-    public Set<RoleModel> getRole() {
+    public RoleModel getRole() {
         return role;
     }
 
-    public void setRole(Set<RoleModel> role) {
+    public void setRole(RoleModel role) {
         this.role = role;
     }
 
-    // métodos de UserDetails
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.stream().map(role -> (GrantedAuthority) role::getName).collect(Collectors.toSet());
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.getName()));
     }
 
     @Override
