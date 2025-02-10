@@ -1,10 +1,9 @@
 package org.mercatto.mercatto_backend.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.mercatto.mercatto_backend.Service.UserService;
+import org.mercatto.mercatto_backend.service.UserService;
 import org.mercatto.mercatto_backend.dto.request.UserRequest;
 import org.mercatto.mercatto_backend.dto.response.UserResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

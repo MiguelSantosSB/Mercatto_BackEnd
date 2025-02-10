@@ -1,6 +1,6 @@
-package org.mercatto.mercatto_backend.Service.impl;
+package org.mercatto.mercatto_backend.service.impl;
 
-import org.mercatto.mercatto_backend.Service.RoleService;
+import org.mercatto.mercatto_backend.service.RoleService;
 import org.mercatto.mercatto_backend.dto.request.RoleRequest;
 import org.mercatto.mercatto_backend.dto.response.RoleResponse;
 import org.mercatto.mercatto_backend.mapper.RoleMapper;

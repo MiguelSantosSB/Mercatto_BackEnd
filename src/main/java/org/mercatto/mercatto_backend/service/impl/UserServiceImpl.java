@@ -1,6 +1,6 @@
-package org.mercatto.mercatto_backend.Service.impl;
+package org.mercatto.mercatto_backend.service.impl;
 
-import org.mercatto.mercatto_backend.Service.UserService;
+import org.mercatto.mercatto_backend.service.UserService;
 import org.mercatto.mercatto_backend.dto.request.UserRequest;
 import org.mercatto.mercatto_backend.dto.response.UserResponse;
 import org.mercatto.mercatto_backend.mapper.UserMapper;

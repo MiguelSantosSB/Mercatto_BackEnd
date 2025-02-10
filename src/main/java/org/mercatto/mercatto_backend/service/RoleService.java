@@ -1,4 +1,4 @@
-package org.mercatto.mercatto_backend.Service;
+package org.mercatto.mercatto_backend.service;
 
 import org.mercatto.mercatto_backend.dto.request.RoleRequest;
 import org.mercatto.mercatto_backend.dto.response.RoleResponse;

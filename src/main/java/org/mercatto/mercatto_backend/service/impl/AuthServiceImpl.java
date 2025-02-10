@@ -1,6 +1,6 @@
-package org.mercatto.mercatto_backend.Service.impl;
+package org.mercatto.mercatto_backend.service.impl;
 
-import org.mercatto.mercatto_backend.Service.AuthService;
+import org.mercatto.mercatto_backend.service.AuthService;
 import org.mercatto.mercatto_backend.configuration.config.JwtUtil;
 import org.mercatto.mercatto_backend.dto.request.LoginRequest;
 import org.springframework.security.authentication.AuthenticationManager;
