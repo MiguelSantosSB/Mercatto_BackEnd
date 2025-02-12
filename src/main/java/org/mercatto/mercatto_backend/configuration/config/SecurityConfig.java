@@ -30,7 +30,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/login", "user/**","roles/**","/swagger-ui/index.html").permitAll()
                         .requestMatchers("/api/**").hasAnyRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER")
-                        .requestMatchers("/store/**").hasAnyRole("ADMIN", "VENDOR")
+                        .requestMatchers("/store/**", "/address/**").hasAnyRole("ADMIN", "OWNER")
                         .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",

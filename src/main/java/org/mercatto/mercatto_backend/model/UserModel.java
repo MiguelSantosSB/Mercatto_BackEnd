@@ -39,24 +39,9 @@ public class UserModel implements UserDetails {
     @Column(unique = true)
     private String rg;
 
-
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private RoleModel role;
-
-    public UserModel() {
-    }
-
-    public UserModel(Long id, String name, String email, String number, String password, String cpf, String rg, RoleModel role) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.number = number;
-        this.password = password;
-        this.cpf = cpf;
-        this.rg = rg;
-        this.role = role;
-    }
 
     public Long getId() {
         return id;
