@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serial;
 
 @Entity
-@Table(name = "address")
+@Table(name = "addresses")
 public class AddressModel {
 
     @Serial

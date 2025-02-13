@@ -66,7 +66,7 @@ public class JwtUtil {
                 .subject(subject)
                 .claims(claims)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + jwtExpiration * 10000L))
+                .expiration(new Date(System.currentTimeMillis() + jwtExpiration * 1000L))
                 .signWith(getSigningKey())
                 .compact();
     }
@@ -76,55 +76,3 @@ public class JwtUtil {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 }
-////    private Key getSigningKey() {
-//////        byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
-////        return Keys.hmacShaKeyFor(jwtSecret.getBytes());
-////    }
-//
-//    private SecretKey getSigningKey() {
-//    byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
-//    return Keys.hmacShaKeyFor(keyBytes);
-//}
-//
-//    public String generateToken(Authentication authentication) {
-//        String username = authentication.getName();
-//        SecretKey key = getSigningKey();
-//
-//        return Jwts.builder()
-//                .subject(username)
-//                .claim("role", username)
-//                .issuedAt(new Date(System.currentTimeMillis()))
-//                .expiration(new Date(System.currentTimeMillis() + jwtExpiration * 1000L))
-//                .signWith(key)
-//                .compact();
-//    }
-//
-//    public String resolveToken(HttpServletRequest request) {
-//        String bearerToken = request.getHeader("Authorization");
-//        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-//            return bearerToken.substring(7);
-//        }
-//        return null;
-//    }
-//
-//    public boolean validateToken(String token) {
-//        try {
-//            SecretKey key = getSigningKey();
-//
-//            Jwts.parser()
-//                    .verifyWith(key)
-//                    .build()
-//                    .parseSignedClaims(token);
-//            return true;
-//        } catch (Exception e) {
-//            return false;
-//        }
-//    }
-//
-//    public String getUserNameFromToken(String token) {
-//        Claims claims = Jwts.parser()
-//                .verifyWith(getSigningKey())
-//                .build().parseSignedClaims(token)
-//                .getPayload();
-//        return claims.getSubject();
-//    }

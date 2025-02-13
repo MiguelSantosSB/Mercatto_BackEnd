@@ -27,7 +27,7 @@ public class UserModel implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String number;
 
     @Column(nullable = false)

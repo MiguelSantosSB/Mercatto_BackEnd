@@ -1,6 +1,7 @@
 package org.mercatto.mercatto_backend.controller;
 
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.mercatto.mercatto_backend.dto.request.StoreRequest;
 import org.mercatto.mercatto_backend.dto.response.StoreResponse;
 import org.mercatto.mercatto_backend.service.StoreService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Tag(name = "Lojas", description = "Crud de loja")
 @RequestMapping("/store")
 public class StoreController {
 

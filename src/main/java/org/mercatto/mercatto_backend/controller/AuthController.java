@@ -1,5 +1,6 @@
 package org.mercatto.mercatto_backend.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.mercatto.mercatto_backend.service.AuthService;
 import org.mercatto.mercatto_backend.dto.request.LoginRequest;
 import org.mercatto.mercatto_backend.dto.response.JwtResponse;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Tag(name = "login", description = "login do users e autenticação")
 @RequestMapping("/auth")
 public class AuthController {
 

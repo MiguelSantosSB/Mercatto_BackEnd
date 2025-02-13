@@ -1,5 +1,6 @@
 package org.mercatto.mercatto_backend.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.mercatto.mercatto_backend.service.RoleService;
 import org.mercatto.mercatto_backend.dto.request.RoleRequest;
 import org.mercatto.mercatto_backend.dto.response.RoleResponse;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/roles")
+@Tag(name = "Role", description = "Criação e edição de permissões do sistema")
+@RequestMapping("/role")
 public class RoleController {
 
     private final RoleService service;

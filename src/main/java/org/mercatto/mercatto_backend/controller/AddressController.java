@@ -1,5 +1,6 @@
 package org.mercatto.mercatto_backend.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.mercatto.mercatto_backend.dto.request.AddressRequest;
 import org.mercatto.mercatto_backend.dto.response.AddressResponse;
 import org.mercatto.mercatto_backend.service.AddressService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Tag(name = "Endereços", description = "Crud de endereços")
 @RequestMapping("/address")
 public class AddressController {
 
