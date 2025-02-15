@@ -1,5 +1,7 @@
 package org.mercatto.mercatto_backend.dto.response;
 
+import java.util.List;
+
 public class StoreResponse {
 
     private Long id;
@@ -9,6 +11,7 @@ public class StoreResponse {
     private String telephone;
     private Long address;
     private Long owner;
+    private List<Long> products;
 
     public Long getId() {
         return id;
@@ -64,5 +67,13 @@ public class StoreResponse {
 
     public void setOwner(Long owner) {
         this.owner = owner;
+    }
+
+    public List<Long> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Long> products) {
+        this.products = products;
     }
 }

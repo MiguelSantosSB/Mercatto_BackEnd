@@ -3,6 +3,7 @@ package org.mercatto.mercatto_backend.model;
 import jakarta.persistence.*;
 
 import java.io.Serial;
+import java.util.List;
 
 @Entity
 @Table(name = "stores")
@@ -34,6 +35,19 @@ public class StoreModel {
     @OneToOne
     @JoinColumn(name = "owner_id",nullable = false)
     private UserModel owner;
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductModel> products;
+
+    public void addProduct(ProductModel product) {
+        products.add(product);
+        product.setStore(this);
+    }
+
+    public void removeProduct(ProductModel product) {
+        products.remove(product);
+        product.setStore(null);
+    }
 
     public Long getId() {
         return id;
@@ -89,5 +103,13 @@ public class StoreModel {
 
     public void setOwner(UserModel owner) {
         this.owner = owner;
+    }
+
+    public List<ProductModel> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductModel> products) {
+        this.products = products;
     }
 }

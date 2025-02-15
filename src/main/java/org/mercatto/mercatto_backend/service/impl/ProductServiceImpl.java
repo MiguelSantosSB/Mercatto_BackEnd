@@ -30,8 +30,13 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse create(ProductRequest request) {
         StoreModel store = storeRepository.findById(request.getStoreId())
                 .orElseThrow(()->new RuntimeException("Loja não encontrada"));
+
         ProductModel product = mapper.toEntity(request, store);
         ProductModel saved = repository.save(product);
+
+        store.addProduct(product);
+        storeRepository.save(store);
+
         return mapper.toResponse(saved);
     }
 
@@ -60,7 +65,12 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(request.getDescription());
         product.setPrice(request.getPrice());
         product.setStock(request.getStock());
-        product.setStore(store);
+
+        if (request.getStoreId() != null) {
+            StoreModel storeId = storeRepository.findById(request.getStoreId())
+                    .orElseThrow(() -> new RuntimeException("Store not found"));
+            product.setStore(storeId);
+        }
 
         ProductModel saved = repository.save(product);
         return mapper.toResponse(saved);

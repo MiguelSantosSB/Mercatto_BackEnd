@@ -3,9 +3,12 @@ package org.mercatto.mercatto_backend.mapper;
 import org.mercatto.mercatto_backend.dto.request.StoreRequest;
 import org.mercatto.mercatto_backend.dto.response.StoreResponse;
 import org.mercatto.mercatto_backend.model.AddressModel;
+import org.mercatto.mercatto_backend.model.ProductModel;
 import org.mercatto.mercatto_backend.model.StoreModel;
 import org.mercatto.mercatto_backend.model.UserModel;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class StoreMapper {
@@ -30,6 +33,11 @@ public class StoreMapper {
         response.setTelephone(store.getTelephone());
         response.setAddress(store.getAddress().getId());
         response.setOwner(store.getOwner().getId());
+        if (store.getProducts() != null) {
+            response.setProducts(store.getProducts().stream()
+                    .map(ProductModel::getId)
+                    .collect(Collectors.toList()));
+        }
         return response;
     }
 }
