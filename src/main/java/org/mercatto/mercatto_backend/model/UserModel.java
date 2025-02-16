@@ -43,6 +43,13 @@ public class UserModel implements UserDetails {
     @JoinColumn(name = "role_id", nullable = false)
     private RoleModel role;
 
+
+    public UserModel() {
+    }
+
+    public UserModel(Long userId) {
+    }
+
     public Long getId() {
         return id;
     }
