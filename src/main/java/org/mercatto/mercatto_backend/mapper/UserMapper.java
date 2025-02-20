@@ -13,7 +13,7 @@ public class UserMapper {
        UserModel user = new UserModel();
        user.setName(request.getName());
        user.setEmail(request.getEmail());
-       user.setNumber(request.getNumber());
+       user.setPhone(request.getPhone());
        user.setPassword(request.getPassword());
        user.setCpf(request.getCpf());
        user.setRg(request.getRg());
@@ -26,7 +26,7 @@ public class UserMapper {
         response.setId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
-        response.setNumber(user.getNumber());
+        response.setPhone(user.getPhone());
         response.setCpf(user.getCpf());
         response.setRg(user.getRg());
         response.setRole(user.getRole().getName());

@@ -12,4 +12,5 @@ public interface StoreService {
     List<StoreResponse> findAll();
     StoreResponse update(Long id, StoreRequest storeRequest);
     void delete(Long id);
+    StoreResponse findByOwnerId(Long id);
 }

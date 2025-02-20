@@ -20,16 +20,6 @@ public class CartModel {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItemModel> items = new ArrayList<>();
 
-    public void addItem(CartItemModel item) {
-        items.add(item);
-        item.setCart(this);
-    }
-
-    public void removeItem(CartItemModel item) {
-        items.remove(item);
-        item.setCart(null);
-    }
-
     public Long getId() {
         return id;
     }

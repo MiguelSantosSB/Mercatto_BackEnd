@@ -12,4 +12,5 @@ public interface UserService {
     List<UserResponse> findAll();
     UserResponse update(Long id, UserRequest userRequest);
     void delete(Long id);
+    Long findIdByEmail(String email);
 }

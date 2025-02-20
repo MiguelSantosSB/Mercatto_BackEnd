@@ -50,4 +50,10 @@ public class UserController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/id-by-email/{email}")
+    public ResponseEntity<Long> getUserIdByEmail(@PathVariable String email) {
+        Long userId = service.findIdByEmail(email);
+        return ResponseEntity.ok(userId);
+    }
 }

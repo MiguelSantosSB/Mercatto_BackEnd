@@ -50,4 +50,10 @@ public class ProductController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/store/{storeId}")
+    public ResponseEntity<List<ProductResponse>> getProductsByStore(@PathVariable Long storeId) {
+        List<ProductResponse> products = service.findByStoreId(storeId);
+        return ResponseEntity.ok(products);
+    }
 }

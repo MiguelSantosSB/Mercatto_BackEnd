@@ -3,30 +3,29 @@ package org.mercatto.mercatto_backend.service.impl;
 import org.mercatto.mercatto_backend.service.AuthService;
 import org.mercatto.mercatto_backend.configuration.config.JwtUtil;
 import org.mercatto.mercatto_backend.dto.request.LoginRequest;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
+import org.mercatto.mercatto_backend.strategy.LoginStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtil jwtUtil;
+    private final Map<String, LoginStrategy> loginStrategies;
 
-    public AuthServiceImpl(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
-        this.authenticationManager = authenticationManager;
-        this.jwtUtil = jwtUtil;
+    @Autowired
+    public AuthServiceImpl(Map<String, LoginStrategy> loginStrategies) {
+        this.loginStrategies = loginStrategies;
     }
 
     @Override
-    public String login (LoginRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return jwtUtil.generateToken((User) authentication.getPrincipal());
+    public String login(LoginRequest request) {
+        String strategyKey = request.getRole() != null ? request.getRole().toLowerCase() + "LoginStrategy" : "emailPasswordLoginStrategy";
+        LoginStrategy strategy = loginStrategies.get(strategyKey);
+        if (strategy == null) {
+            throw new IllegalArgumentException("Invalid login strategy");
+        }
+        return strategy.login(request);
     }
 }

@@ -4,7 +4,7 @@ public class UserResponse {
     private Long id;
     private String name;
     private String email;
-    private String number;
+    private String phone;
     private String cpf;
     private String rg;
     private String role;
@@ -33,12 +33,12 @@ public class UserResponse {
         this.email = email;
     }
 
-    public String getNumber() {
-        return number;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getCpf() {

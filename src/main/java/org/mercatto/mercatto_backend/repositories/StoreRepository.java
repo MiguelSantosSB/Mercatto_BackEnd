@@ -11,4 +11,6 @@ public interface StoreRepository extends JpaRepository<StoreModel, Long> {
     Optional<StoreModel> findByName(String name);
 
     Optional<StoreModel> findById(Long id);
+
+    Optional<StoreModel> findByOwnerId(Long id);
 }

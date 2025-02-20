@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serial;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -28,7 +27,7 @@ public class UserModel implements UserDetails {
     private String email;
 
     @Column(unique = true)
-    private String number;
+    private String phone;
 
     @Column(nullable = false)
     private String password;
@@ -43,6 +42,8 @@ public class UserModel implements UserDetails {
     @JoinColumn(name = "role_id", nullable = false)
     private RoleModel role;
 
+    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private StoreModel Store;
 
     public UserModel() {
     }
@@ -74,12 +75,12 @@ public class UserModel implements UserDetails {
         this.email = email;
     }
 
-    public String getNumber() {
-        return number;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setPhone(String number) {
+        this.phone = number;
     }
 
     public String getPassword() {
@@ -112,6 +113,14 @@ public class UserModel implements UserDetails {
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+
+    public StoreModel getStore() {
+        return Store;
+    }
+
+    public void setStore(StoreModel store) {
+        Store = store;
     }
 
     @Override

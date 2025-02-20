@@ -32,6 +32,13 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public StoreResponse create(StoreRequest request) {
+        System.out.println("Address ID recebido: "+ request.getAddress());
+        System.out.println("Owner ID recebido: "+ request.getOwner());
+        if (request.getOwner() == null || request.getAddress() == null) {
+            throw new IllegalArgumentException("IDs não podem ser nulos");
+        }
+
+
         AddressModel address = addressRepository.findById(request.getAddress()).orElseThrow(() -> new RuntimeException("Address not found"));
         UserModel owner = userRepository.findById(request.getOwner()).orElseThrow(() -> new RuntimeException("Owner not found"));
 
@@ -84,5 +91,12 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public StoreResponse findByOwnerId(Long ownerId) {
+        StoreModel store = repository.findByOwnerId(ownerId)
+                .orElseThrow(() -> new RuntimeException("Store not found"));
+        return mapper.toResponse(store);
     }
 }

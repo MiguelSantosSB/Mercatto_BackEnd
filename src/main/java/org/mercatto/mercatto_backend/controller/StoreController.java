@@ -51,4 +51,11 @@ public class StoreController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("by-owner/{ownerId}")
+    public ResponseEntity<StoreResponse> findByOwnerId(@PathVariable Long ownerId) {
+        StoreResponse response = service.findByOwnerId(ownerId);
+        return ResponseEntity.ok(response);
+    }
+
 }

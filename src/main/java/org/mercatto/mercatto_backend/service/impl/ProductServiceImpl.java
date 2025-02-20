@@ -19,11 +19,15 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository repository;
     private final StoreRepository storeRepository;
     private final ProductMapper mapper;
+    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public ProductServiceImpl(ProductRepository repository, StoreRepository storeRepository, ProductMapper mapper) {
+    public ProductServiceImpl(ProductRepository repository, StoreRepository storeRepository, ProductMapper mapper, ProductRepository productRepository, ProductMapper productMapper) {
         this.repository = repository;
         this.storeRepository = storeRepository;
         this.mapper = mapper;
+        this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     @Override
@@ -51,6 +55,15 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductResponse> findAll() {
         return repository.findAll().stream()
                 .map(mapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductResponse> findByStoreId(Long storeId) {
+        List<ProductModel> products = productRepository.findByStoreId(storeId)
+                .orElseThrow(() -> new RuntimeException("Não foi possivel achar a loja"));
+        return products.stream()
+                .map(productMapper::toResponse)
                 .collect(Collectors.toList());
     }
 
